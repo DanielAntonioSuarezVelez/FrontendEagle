@@ -1,0 +1,114 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Insertar Pedido</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Insertar Pedido</li>
+              </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <section class="content" >
+    <div class="container-fluid">
+    </div>
+</section> -->
+
+<section >
+  <!-- Contenido -->
+ <div class="container-fluid">
+   <div class="row">
+        <div class="col-lg-6">
+            <div id="producto">
+                <div class="table-responsibe">
+                    <table class="table">
+                        <thead>
+                            <caption>PRODUCTOS</caption>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Stock</th>
+                                <th>Precio</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let item of productos">
+                                <td>{{item.id_producto}}</td>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.cantidad}}</td>
+                                <td>{{item.valor_unitario}}</td>
+                                <td>
+                                    <span class="fas fa-check-square" style="color: green; font-size: 18px; cursor: pointer;" (click)="seleccionar(item, item.id_producto)"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                       
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="table-responsibe">
+                <table class="table">
+                        <thead>
+                            <caption>CLIENTE</caption>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" placeholder="Nit del cliente" [(ngModel)]="ident_cliente" (keyup)="consulta_cliente()">
+                                        </div>
+                                        <div class="col-lg-5">{{nombre_cliente}}</div>
+                                    </div>
+                                </td>      
+                            </tr>
+                        </thead>                    
+                </table>
+            </div>
+            <div class="table-responsibe">
+                <table class="table">
+                        <thead>
+                            <caption>Pedido</caption>
+                            <tr>
+                                <th>Producto</th>
+                                <th>V. Unitario</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th> 
+                                <th></th>      
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let itemp of matriz_productos">
+                                <td>{{itemp[1]}}</td>
+                                <td>{{itemp[2] | currency}}</td>
+                                <td>{{itemp[3]}}</td>
+                                <td>{{itemp[4] | currency}}</td>
+                                <td>
+                                    <span class="bi bi-trash3-fill" style="color: red; cursor: pointer" title="Quitar" (click)="quitar_productos(itemp[0])"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td><b>Total:</b></td>
+                                <td>{{total | currency}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>                    
+                </table>
+            </div>
+            <input type="button" value="Guardar Pedido" class="btn btn-warning" style="width: 100%;" (click)="guardar()">
+        </div>
+
+   </div>
+
+
+ </div> <!-- Div Principla contenido -->
+</section>
+

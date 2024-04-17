@@ -1,0 +1,160 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Terceros</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Terceros</li>
+              </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <section class="content" >
+    <div class="container-fluid">
+    </div>
+</section> -->
+
+<section >
+     <!-- Contenido -->
+    <div class="container-fluid">
+      <hr>
+
+       <!-- Botor Insertar -->
+      <input type="button" value=" Insertar Tercero" class="btn btn-warning" (click)="mostar_form('mostrar')" *ngIf="botones_form==false">
+      <hr *ngIf="botones_form==false">
+      
+      <!-- Formulario Insertar -->
+      <div id="formulario" *ngIf="mform == true">
+        
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="text" class="form-control" placeholder="Nit" [(ngModel)]="obj_tercero.nit">
+              <span style="color: red;" *ngIf="validar_nit == false"> Ingresar Nit</span>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="obj_tercero.nombre">
+              <span style="color: red;" *ngIf="validar_nombre == false"> Ingresar Nombre</span>
+            </div>
+            
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="text" class="form-control" placeholder="Telefono" [(ngModel)]="obj_tercero.telefono">
+              <span style="color: red;" *ngIf="validar_telefono == false"> Ingresar Telefono</span>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" placeholder="Direccion" [(ngModel)]="obj_tercero.direccion">
+              <span style="color: red;" *ngIf="validar_direccion == false"> Ingresar Direccion</span>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="text" class="form-control" placeholder="Correo" [(ngModel)]="obj_tercero.correo">
+              <span style="color: red;" *ngIf="validar_correo == false"> Ingresar Correo</span>
+            </div>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" placeholder="Descripcion" [(ngModel)]="obj_tercero.descripcion">
+              <span style="color: red;" *ngIf="validar_descripcion == false"> Ingresar Descrpcion</span>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <select class="form-control form-select" [(ngModel)]="obj_tercero.tipo_tercero">
+                <option value="" label="Seleccione Tipo Tercero" selected="selected">seleccione tipo Tercero</option>
+                <option value="Cliente">Cliente</option>
+                <option value="Proveedor">Proveedor</option>
+              </select>
+              <span style="color: red;" *ngIf="validar_tipo_tercero == false"> Seleccionar Tipo Tercero</span>
+            </div>
+            <div class="col-lg-6">
+              <select class="form-control form-select" [(ngModel)]="obj_tercero.fodpto"  (change)="consultaciudad(obj_tercero.fodpto)">
+                <option value="0" label="Seleccione Departamento" selected="selected">seleccione Departamento</option>
+                <option *ngFor="let itemdpto of dpto" value="{{itemdpto.id_dpto}}">{{itemdpto.nombre}}</option>
+              </select>
+              <span style="color: red;" *ngIf="validar_fodpto == false"> Seleccionar Departamento</span>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-6">
+              <select class="form-control form-select" [(ngModel)]="obj_tercero.foidciudad" *ngIf="obj_tercero.fodpto!=0">
+                <option value="0" label="Seleccione Ciudad" selected="selected">seleccione la Ciudad</option>
+                <option *ngFor="let itemciudad of ciudad" value="{{itemciudad.id_ciudad}}">{{itemciudad.nombre}}</option>
+              </select>
+              <span style="color: red;" *ngIf="validar_foidciudad == false" > Seleccione la Ciudad</span>
+            </div>
+        </div>
+
+          <br>
+          <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-3">
+              <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form==false">
+              <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form==true">
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-3">
+              <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostar_form('no mostrar')">
+            </div>
+            <div class="col-lg-2"></div>
+          </div>
+
+      </div>
+        <br>
+        
+
+
+        <!-- Tabla Consultar -->
+        <div id="tabla">
+          <div class="row">
+            <!-- <div class="col-lg-1"></div> -->
+            <div class="col-lg-12">
+            <div class="table-responsibe"> <!-- contenido tabla -->
+                <table class="table">
+                    <tr>
+                      <th>Nit</th>
+                      <th>Nombre</th>
+                      <th>Telefono</th>
+                      <th>Direccion</th>
+                      <th>Correo</th>
+                      <th>Descripcion</th>
+                      <th>Tipo Tercero</th>
+                      <th>Ciudad</th>
+                      <th>Departamento</th>
+                      <th>Acciones</th>
+                    </tr> 
+                    <tr *ngFor="let item of tercero">
+                      <td>{{item.nit}}</td>
+                      <td>{{item.nombre}}</td>
+                      <td>{{item.telefono}}</td>
+                      <td>{{item.direccion}}</td>
+                      <td>{{item.correo}}</td>
+                      <td>{{item.descripcion}}</td>
+                      <td>{{item.tipo_tercero}}</td>
+                      <td>{{item.ciudad}}</td>
+                      <td>{{item.dpto}}</td>
+                      <td>
+                        <span class="bi bi-pencil-fill" style="color: blue; cursor: pointer" title="Editar" (click)="cargar_datos(item, item.id_tercero); consultaciudad(obj_tercero.fodpto) "></span>
+                        <span class="bi bi-trash3-fill" style="color: red; cursor: pointer" title="Eliminar" (click)="eliminar(item.id_tercero)"></span>
+                      </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+            <!-- <div class="col-lg-1"></div> -->
+          </div>
+        </div>  <!-- /Tabla -->
+
+    </div> <!-- Div Principla contenido -->
+</section>

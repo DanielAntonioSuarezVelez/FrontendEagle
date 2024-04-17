@@ -1,0 +1,82 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Marcas</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Marcas</li>
+              </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <section class="content" >
+    <div class="container-fluid">
+    </div>
+</section> -->
+
+<section >
+  <!-- Contenido -->
+ <div class="container-fluid">
+   <hr>
+
+    <!-- Botor Insertar -->
+   <input type="button" value=" Insertar Marca" class="btn btn-warning" (click)="mostar_form('mostrar')" *ngIf="botones_form==false">
+   <hr *ngIf="botones_form==false">
+   
+   <!-- Formulario Insertar -->
+   <div id="formulario" *ngIf="mform == true">
+     
+       <div class="row">
+         <div class="col-lg-5">
+           <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="obj_marca.nombre">
+           <span style="color: red;" *ngIf="validar_nombre == false"> Ingresar Nombre</span>
+         </div>
+         <div class="col-lg-1"></div>
+         <div class="col-lg-3">
+           <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form==false">
+           <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form==true">
+         </div>
+         <div class="col-lg-3">
+           <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostar_form('no mostrar')">
+         </div>
+         
+       </div>
+
+   </div>
+   <hr>
+
+
+     <!-- Tabla Consultar -->
+     <div id="tabla">
+       <div class="row">
+         <div class="col-lg-2"></div>
+         <div class="col-lg-8">
+         <div class="table-responsibe"> <!-- contenido tabla -->
+             <table class="table">
+                 <tr>
+                   <th>Codigo</th>
+                   <th>Nombre</th>
+                   <th>Acciones</th> 
+                 </tr> 
+                 <tr *ngFor="let item of marca">
+                  <td>{{item.id_marca}}</td>
+                  <td>{{item.nombre}}</td>
+                   <td>           
+                     <span class="bi bi-pencil-fill" style="color: blue; cursor: pointer" title="Editar" (click)="cargar_datos(item, item.id_marca)" ></span>
+                     <span class="bi bi-trash3-fill" style="color: red; cursor: pointer" title="Eliminar" (click)="eliminar(item.id_marca)" ></span>
+                   </td>
+                 </tr>
+             </table>
+         </div>
+         </div>
+         <div class="col-lg-2"></div>
+       </div>
+     </div>  <!-- /Tabla -->
+
+ </div> <!-- Div Principla contenido -->
+</section>

@@ -1,0 +1,112 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Pedidos</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Pedidos</li>
+              </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+<section >
+  <!-- Contenido -->
+ <div class="container-fluid">
+   <hr>
+
+    <!-- Botor Insertar -->
+   <input type="button" value=" Agregar Pedido" class="btn btn-warning" (click)="insertar()" *ngIf="botones_form==false">
+   <!-- (click)="mostar_form('mostrar')" -->
+   <hr *ngIf="botones_form==false">
+   
+
+     <!-- Tabla Consultar -->
+     <div id="tabla">
+       <div class="row">
+         <div class="col-lg-1"></div>
+         <div class="col-lg-11">
+         <div class="table-responsibe"> <!-- contenido tabla -->
+             <table class="table">
+                 <tr>
+                    <th>No Pedido</th>
+                    <th>Fecha Compra</th>
+                    <th>Proveedor</th>
+                    <th>Productos</th>
+                    <th>Total Compra</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                 </tr> 
+                 <tr *ngFor="let item of pedido">
+                    <td style="color: red;">{{item.id_pedido}}</td>
+                    <td>{{item.fecha_pedido}}</td>
+                    <td>{{item.tercero}}</td>
+                    <td>
+                    <input type="button" class="btn btn-outline-success btn-sm" value="Ver Productos" data-toggle="modal" data-target="#verproductos" (click)="mostrar_modal(item.id_pedido)">
+                    </td>
+                    <td>{{item.total_pedido | currency }}</td>
+                    <td>{{item.usuario}}</td>
+                    <td>
+                      <span class="bi bi-pencil-fill" style="color: blue; cursor: pointer" title="Editar" ></span>
+                      <!-- (click)="cargar_datos(item, item.id_pedido)" -->
+                      <span class="bi bi-trash3-fill" style="color: red; cursor: pointer" title="Anular" (click)="anular(item.id_pedido)" ></span>
+                    </td>
+                 </tr>
+             </table>
+         </div>
+         </div>
+         <!-- <div class="col-lg-1"></div> -->
+       </div>
+     </div>  <!-- /Tabla -->
+
+ </div> <!-- Div Principla contenido -->
+</section>
+
+
+<!-- DModal -->
+
+<!-- Modal -->
+<div class="modal fade" id="verproductos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Productos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>V. Unitario</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+          <tr *ngFor="let itemp of productos">
+            <td>{{itemp[0]}}</td>
+            <td>{{itemp[1]}}</td>
+            <td>{{itemp[2] | currency}}</td>
+            <td>{{itemp[3]}}</td>
+            <td>{{itemp[4] | currency}}</td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td><b>TOTAL:</b></td>
+            <td><b>{{total | currency}}</b></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Inventario</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Inventario</li>
+              </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- <section class="content" >
+    <div class="container-fluid">
+    </div>
+</section> -->
+
+<section >
+  <!-- Contenido -->
+ <div class="container-fluid">
+   <hr>
+
+    <!-- Botor Insertar -->
+   <input type="button" value=" Agregar Producto" class="btn btn-warning" (click)="mostar_form('mostrar')" *ngIf="botones_form==false">
+   <hr *ngIf="botones_form==false">
+   
+   <!-- Formulario Insertar -->
+   <div id="formulario" *ngIf="mform == true">
+     
+       <div class="row">
+         <div class="col-lg-6">
+           <input type="text" class="form-control" placeholder="Nombre Producto" [(ngModel)]="obj_producto.nombre">
+           <span style="color: red;" *ngIf="validar_nombre == false"> Ingresar Nombre Producto</span>
+         </div>
+         <div class="col-lg-6">
+          <input type="date" class="form-control" placeholder="Productos" [(ngModel)]="obj_producto.fecha_creacion">
+          <span style="color: red;" *ngIf="validar_fecha_creacion == false"> Fecha Creacion </span>
+        </div>
+         
+       </div>
+       <br>
+
+       <div class="row">
+         <div class="col-lg-6">
+           <input type="number" class="form-control" placeholder="Valor Unitario" [(ngModel)]="obj_producto.valor_unitario">
+           <span style="color: red;" *ngIf="validar_valor_unitario == false"> Valor Unitario</span>
+         </div>
+         <div class="col-lg-6">
+           <input type="number" class="form-control" placeholder="Valor Compra" [(ngModel)]="obj_producto.valor_compra">
+           <span style="color: red;" *ngIf="validar_valor_compra == false"> Valor Compra</span>
+         </div>
+       </div>
+       <br>
+
+       <div class="row">
+        <div class="col-lg-6">
+          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="obj_producto.cantidad">
+          <span style="color: red;" *ngIf="validar_cantidad == false"> Cantidad</span>
+        </div>
+        <div class="col-lg-6">
+          <select class="form-control form-select" [(ngModel)]="obj_producto.foidcategoria">
+            <option value="0" label="Seleccione Categoria" selected="selected">Seleccione Categoria</option>
+            <option *ngFor="let itemcategoria of categoria" value="{{itemcategoria.id_categoria}}">{{itemcategoria.nombre}}</option>
+          </select>
+           <span style="color: red;" *ngIf="validar_foidcategoria== false"> Selecciona una Categoria</span>
+         </div>  
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <select class="form-control form-select" [(ngModel)]="obj_producto.foidmarca">
+            <option value="0" label="Seleccione Marca" selected="selected">Seleccione Marca</option>
+            <option *ngFor="let itemmarca of marca" value="{{itemmarca.id_marca}}">{{itemmarca.nombre}}</option>
+          </select>
+           <span style="color: red;" *ngIf="validar_foidmarca== false"> Selecciona una Marca</span>
+         </div> 
+        <div class="col-lg-6">
+          <select class="form-control form-select" [(ngModel)]="obj_producto.foidusuario">
+            <option value="0" label="Seleccione Usuario" selected="selected">Seleccione Usuario</option>
+            <option *ngFor="let itemusuario of usuario" value="{{itemusuario.id_usuario}}">{{itemusuario.nombre}}</option>
+          </select>
+           <span style="color: red;" *ngIf="validar_foidusuario== false"> Selecciona un Usuario</span>
+         </div>  
+      </div>
+      <br>
+
+
+       <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3">
+           <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form==false">
+           <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form==true">
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3">
+           <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostar_form('no mostrar')">
+        </div>
+        <div class="col-lg-2"></div>
+       </div>
+       <br>
+
+   </div>
+     <hr *ngIf="botones_form==true">
+
+
+     <!-- Tabla Consultar -->
+     <div id="tabla">
+       <div class="row">
+         <div class="col-lg-1"></div>
+         <div class="col-lg-11">
+         <div class="table-responsibe"> <!-- contenido tabla -->
+             <table class="table">
+                 <tr>
+                   <th>Codigo</th>
+                   <th>Nombre</th>
+                   <th>Fecha Creacion</th>
+                   <th>Valor Unitario</th>
+                   <th>Valor Compra</th>
+                   <th>Cantidad</th>
+                   <th>Categoria</th>
+                   <th>Marca</th>
+                   <th>Usuario</th>
+                   <th>Acciones</th>
+                 </tr> 
+                 <tr *ngFor="let item of producto">
+                   <td>{{item.id_producto}}</td>
+                   <td>{{item.nombre}}</td>
+                   <td>{{item.fecha_creacion}}</td>
+                   <td>{{item.valor_unitario  | currency}}</td>
+                   <td>{{item.valor_compra  | currency}}</td>
+                   <td>{{item.cantidad}}</td>
+                   <td>{{item.categoria}}</td>
+                   <td>{{item.marca}}</td>
+                   <td>{{item.usuario}}</td>
+                   <td>
+                     <span class="bi bi-pencil-fill" style="color: blue; cursor: pointer" title="Editar" (click)="cargar_datos(item, item.id_producto)"></span>
+                     <span class="bi bi-trash3-fill" style="color: red; cursor: pointer" title="Eliminar" (click)="eliminar(item.id_producto)"></span>
+                   </td>
+                 </tr>
+             </table>
+         </div>
+         </div>
+         <!-- <div class="col-lg-1"></div> -->
+       </div>
+     </div>  <!-- /Tabla -->
+
+ </div> <!-- Div Principla contenido -->
+</section>
